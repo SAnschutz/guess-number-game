@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 
-import { StatusBar } from 'expo-status-bar';
+import { StatusBar } from 'expo-status-bar'; //usually in the App component, but can be used in individual files if need it!
 import { LinearGradient } from 'expo-linear-gradient';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
@@ -66,21 +66,24 @@ export default function App() {
   }
 
   return (
-    <LinearGradient
-      colors={[Colors.primary700, Colors.accent500]}
-      style={styles.rootScreen}
-    >
-      <ImageBackground
-        source={require('./assets/images/background.png')} //Image Background is actually a combination of a View and an Image
-        resizeMode='cover'
-        style={styles.rootScreen} //this is applied to the View component of the "ImageBackground" (in this case we've given it a flex of 1 so it'll fill the whole screen)
-        imageStyle={styles.backgroundImage} //this is applied to the image itself -- we've given it opacity so the surrounding LinearGradient can shine through
+    <Fragment>
+      <StatusBar style='light' />
+      <LinearGradient
+        colors={[Colors.primary700, Colors.accent500]}
+        style={styles.rootScreen}
       >
-        <SafeAreaView style={styles.rootScreen}>
-          {screen}
-        </SafeAreaView>
-      </ImageBackground>
-    </LinearGradient>
+        <ImageBackground
+          source={require('./assets/images/background.png')} //Image Background is actually a combination of a View and an Image
+          resizeMode='cover'
+          style={styles.rootScreen} //this is applied to the View component of the "ImageBackground" (in this case we've given it a flex of 1 so it'll fill the whole screen)
+          imageStyle={styles.backgroundImage} //this is applied to the image itself -- we've given it opacity so the surrounding LinearGradient can shine through
+        >
+          <SafeAreaView style={styles.rootScreen}>
+            {screen}
+          </SafeAreaView>
+        </ImageBackground>
+      </LinearGradient>
+    </Fragment>
   );
 }
 
